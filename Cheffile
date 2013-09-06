@@ -14,7 +14,9 @@ cookbook 'openssl'
 cookbook 'php'
 cookbook 'varnish'
 
-# elife git repos
+# elife drupal module git repos, and highwire drupal base site
 cookbook 'drupal-site-jnl-elife-cookbook',
         :git=> 'git@github.com:elifesciences/drupal-site-jnl-elife-cookbook.git'
 
+# TDODOs
+# - provide specific versions for community cookbooks
