@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+site 'http://community.opscode.com/api/v1'
+
+# basics for drupal
+cookbook 'apt'
+cookbook 'git'
+cookbook 'apache2'
+cookbook 'build-essential'
+cookbook 'memcached'
+cookbook 'mysql'
+cookbook 'openssl'
+cookbook 'php'
+cookbook 'varnish'
+
+# elife git repos
+cookbook 'drupal-site-jnl-elife-cookbook',
+        :git=> 'git@github.com:elifesciences/drupal-site-jnl-elife-cookbook.git'
+
