@@ -48,8 +48,13 @@ This git repo contains a placeholder `public` directory. This is the directory t
 
 ## TODO
 
+- netowrking is not working, so after install you can't actually see drupal running on the vm
+
+- the roles are a little over complicated, these should be simplified
+
 - `cookbooks/drupal/recipes/drupal_apps.rb` has been modified to not check whether the key `#if node["hosts"].has_key("localhost_aliases")` exists. Probably an updated issues with Ruby, should check, and re-imliment
 
 - apc has been turned off, as getting it to install via chef was beyond me.
 
 - contribute back fixes to the main vagrant-drupal project, and stop holiding a private version of these cookbooks. 
+
