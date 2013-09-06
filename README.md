@@ -10,6 +10,10 @@ It is being built on top of the [drupal - vagrant project](https://drupal.org/pr
 
 To setup your system to work with Vagrant and Chef please follow the guide provided at [elife-template-env](https://github.com/elifesciences/elife-template-env).
 
+You are advised to setup and use the elife specified base box described in that guide, as it contains a base box configured with the required versions of chef, php and vagrant. If you don't have it setup already, you can add this box with the command:
+
+	$ vagrant box add pre64-elife-rb1.9-chef-11
+http://cdn.elifesciences.org/vm/pre64-elife-rb1.9-chef-11.box
 
 # Quickstart
 
