@@ -13,10 +13,25 @@ cookbook 'mysql'
 cookbook 'openssl'
 cookbook 'php'
 cookbook 'varnish'
+cookbook 'hosts'
+cookbook 'phpmyadmin'
 
 # elife drupal module git repos, and highwire drupal base site
 cookbook 'drupal-site-jnl-elife-cookbook',
         :git=> 'git@github.com:elifesciences/drupal-site-jnl-elife-cookbook.git'
+
+# elife modified cookbooks for drupal installation
+cookbook 'drupal',
+        :git=> 'git@github.com:elifesciences/elife-drupal-cookbook.git'
+
+cookbook 'drush',
+        :git=> 'git@github.com:elifesciences/elife-drush-cookbook.git'
+
+cookbook 'drush_make',
+        :git=> 'git@github.com:elifesciences/elife-drush-make-cookbook.git'
+
+# - hosts
+# - phpmyadmin
 
 # TDODOs
 # - provide specific versions for community cookbooks
