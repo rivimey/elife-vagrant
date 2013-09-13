@@ -44,8 +44,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.network :hostonly, "33.33.33.10"
   # new syntax is now
   # config.vm.network :public_network
-  config.vm.network :private_network, ip: "33.33.33.10"
-  config.vm.network :forwarded_port, host: 4567, guest: 80
+  config.vm.network :private_network, ip: "192.168.33.40"
+  config.vm.network :forwarded_port, guest: 22, host: 1234
+  # config.vm.network :private_network, ip: "33.33.33.10"
+  # config.vm.network :forwarded_port, host: 4567, guest: 80
   # config.vm.network :forwarded_port, guest: 80, host: 8087
 
   # ensure the chef and version on the provisioined machine is up to date
@@ -89,7 +91,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.json = {
             "www_root" => '/vagrant/public',
             "hosts" => {
-            "localhost_aliases" => ["drupal.vbox.local", "dev-site.vbox.local"]
+            "localhost_aliases" => ["drupal.vbox.local"]#, "drupal.vbox.local"]
             },
             "mysql" => {
                 "server_root_password" => "root",
