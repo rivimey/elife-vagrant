@@ -17,10 +17,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  # config.vm.synced_folder  "v-root", "/vagrant"
-  # config.vm.synced_folder "/", "/vagrant"
-  # config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
-  # config.vm.share_folder("v-apt", "/var/cache/apt", "~/temp/vagrant_aptcache/apt", :nfs => true)
+  # need to add apache to the synced folder via
+  config.vm.synced_folder "./public", "/vagrant/public", id: "vagrant-root", :owner => "www-data", :group => "www-data"
+
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "pre64-elife-rb1.9-chef-11"
@@ -39,20 +38,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  # config.vm.network :private_network, ip: "192.168.33.10"
-  # ports 
-  # config.vm.network :hostonly, "33.33.33.10"
   # new syntax is now
-  # config.vm.network :public_network
-  config.vm.network :private_network, ip: "192.168.33.40"
-  config.vm.network :forwarded_port, guest: 22, host: 1234
-  # config.vm.network :private_network, ip: "33.33.33.10"
-  # config.vm.network :forwarded_port, host: 4567, guest: 80
-  # config.vm.network :forwarded_port, guest: 80, host: 8087
+  config.vm.network :private_network, ip: "192.168.33.44"
 
-  # ensure the chef and version on the provisioined machine is up to date
-  # config.vm.provision :shell, inline: 'apt-get install ruby1.9.1-dev'
-  # config.vm.provision :shell, inline: 'gem install chef --version 11.4.4 --no-rdoc --no-ri'
   config.vm.provision "chef_solo" do |chef|
 
     # This role represents our default Drupal development stack.
@@ -73,6 +61,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.roles_path = ["roles"]
 
     # this installs most of the infrastrucutre required to support a drupal instance
+
+    chef.add_recipe 'apt' # add this so we have updated packages available
     chef.add_recipe "git"
     chef.add_recipe "drupal-site-jnl-elife-cookbook"
     chef.add_role("drupal_lamp_varnish_dev")
@@ -91,12 +81,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.json = {
             "www_root" => '/vagrant/public',
             "hosts" => {
-            "localhost_aliases" => ["drupal.vbox.local"]#, "drupal.vbox.local"]
+            "localhost_aliases" => ["drupal.vbox.local", "elife.vbox.local"]#, "drupal.vbox.local"]
             },
             "mysql" => {
                 "server_root_password" => "root",
                 "server_repl_password" => "root",
-                "server_debian_password" => "root"
+                "server_debian_password" => "root",
+                "elife_user_password" => "elife"                
                 }
         }   
 
