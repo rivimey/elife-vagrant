@@ -1,0 +1,1 @@
+./public in elife-vagrant repo is mapped to /vagrant/public in the vm.
