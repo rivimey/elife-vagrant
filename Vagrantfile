@@ -20,6 +20,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # need to add apache to the synced folder via
   config.vm.synced_folder "./public", "/vagrant/public", id: "vagrant-root", :owner => "www-data", :group => "www-data"
 
+  # this expects the drupal-site-jnl-elife git repository checked out in the same parent folder
+  config.vm.synced_folder "../drupal-site-jnl-elife", "/shared/elife_module"
+
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "pre64-elife-rb1.9-chef-11"
@@ -74,22 +77,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # chef.add_role("drupal_dev")
     # chef.add_recipe "drupal::drupal_apps"
 
-    chef.add_recipe 'drupal::example'
+    # chef.add_recipe 'drupal::example'
 
     # we set these attrbutes, and in particular the mysql root passwors
     # as in chef solo we don't have access to a chef server
     chef.json = {
-            "www_root" => '/vagrant/public',
-            "hosts" => {
-            "localhost_aliases" => ["drupal.vbox.local", "elife.vbox.local"]#, "drupal.vbox.local"]
-            },
-            "mysql" => {
-                "server_root_password" => "root",
-                "server_repl_password" => "root",
-                "server_debian_password" => "root",
-                "elife_user_password" => "elife"                
-                }
-        }   
+	    "hosts" => {
+		    "localhost_aliases" => ["drupal.vbox.local"]
+	    },
+	    "mysql" => {
+		    "server_root_password" => "root",
+		    "server_repl_password" => "root",
+		    "server_debian_password" => "root",
+		    "elife_user_password" => "elife"                
+	    }
+    }   
 
 
     # chef.add_recipe 'apt'
