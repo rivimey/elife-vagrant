@@ -26,17 +26,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   # This setting is global to the file; select dummy for AWS otherwise select pre64..
   config.vm.box = "pre64-elife-rb1.9-chef-11"
-  #config.vm.box = "dummy"
+  config.vm.box_url = "http://cdn.elifesciences.org/vm/pre64-elife-rb1.9-chef-11.box"
 
-# # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # # # # #
 
   # Install latest version of Chef
   #config.omnibus.chef_version = :latest
 
-  config.vm.provider :aws do |aws, override| 
+  config.vm.provider :aws do |aws, override|
 
     # Ruth
-    aws.access_key_id = ENV['AWS_KEY_ID'] 
+    aws.access_key_id = ENV['AWS_KEY_ID']
     aws.secret_access_key = ENV['AWS_SECRET_KEY']
     aws.keypair_name = ENV['AWS_KEYPAIR_NAME']
     override.ssh.private_key_path = ENV['AWS_KEY_PATH']
@@ -49,17 +49,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.instance_type = "m1.large"
     aws.security_groups = [ "default" ]
 
-    aws.ami = "ami-de0d9eb7" 
-    aws.region = "us-east-1" 
+    aws.ami = "ami-de0d9eb7"
+    aws.region = "us-east-1"
 
-    override.ssh.username = "ubuntu" 
+    override.ssh.username = "ubuntu"
     aws.tags = {
       'Name' => 'Elife Vagrant',
      }
 
   end   # of aws provider
 
-# # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # # # # #
 
 
 
@@ -75,7 +75,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # # Use VBoxManage to customize the VM. For example to change memory:
     vb.customize ["modifyvm", :id, "--memory", "1024"]
     vb.customize ["modifyvm", :id, "--vram", "12"]
-  
+
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.
     # new syntax is now
@@ -83,7 +83,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   end    # of vbox provider
 
-# # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # # # # #
 
   config.vm.provision "chef_solo" do |chef|
 
@@ -124,7 +124,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "site_name" => "elife.vbox.local",        # a single name by which the server is known
         "site_aliases" => [],                     # used in web_app recipe, alternate names for server
         "shared_folder" => "/vagrant/public",     # in-VM folder used to mount .../elife-vagrant/public
-        "drupal_sqlfile" => "jnl-elife.sql",      # Base filename of SQL database dump. gzip compressed as ".gz" 
+        "drupal_sqlfile" => "jnl-elife.sql",      # Base filename of SQL database dump. gzip compressed as ".gz"
       },
       "mysql" => {
         "server_database" => "jnl_elife",         # the name of the database. Must match settings.php
@@ -139,7 +139,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "hiwire_rev" => "7.x-1.x-stable",
         "webroot_rev" => "7.x-1.x-stable",
       }
-    }   
+    }
 
   end   # of chef_solo provision
 
