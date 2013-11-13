@@ -16,7 +16,7 @@ Tunnelblick installed on the host
 
 To setup your system to work with Vagrant and Chef please follow the guide provided at [elife-template-env](https://github.com/elifesciences/elife-template-env).
 
-You are advised to setup and use the elife specified base box described in that guide, as it contains a base box configured with the required versions of chef, php and vagrant. If you don't have it setup already, you can add this box with the command:
+The first time that you run vagrant it will attempt to detect whether you have the required base box on your machine. If you haven't then it will download this for you. If you wish to run this step manually then you can do so with the following command:
 
 	vagrant box add pre64-elife-rb1.9-chef-11 http://cdn.elifesciences.org/vm/pre64-elife-rb1.9-chef-11.box
 
@@ -27,17 +27,17 @@ Set up Tunnelblick to connect to Highwire using the key provided, and then conne
 Currently, use branch ruth-vagrant-fixes for the elife-vagrant module.
 
 	git clone git@github.com:elifesciences/elife-vagrant.git
-	
+
 	### change elifesciences to highwire in the next line if you have access and want the official repo: ###
 	git clone git@github.com:elifesciences/drupal-highwire.git
-	
+
 	git clone git@github.com:elifesciences/drupal-site-jnl-elife.git
 	cd elife-vagrant
 
 Now, Locate a copy of the journal database dump and save as a gzipped compressed file to .../elife-vagrant/public/jnl-elife.sql.gz, and locate a copy of the settings.php file (with drupal passwords and database setup) and save in .../elife-vagrant/public/settings.php
 
 	librarian-chef install && vagrant up
-	
+
 	## not necessary, but to check the server out, do:
 	vagrant ssh
 
@@ -64,9 +64,9 @@ To remake, following a change in the config files, do:
 
 Cookbooks are installed using librarian. Check the `Cheffile` to see which cookbooks we donwnlad as community cookbooks, and which ones we have made private instances of. (Creating a private instance of a cookbook is an anti-pattern, however for our immediate purposes, this is OK).
 
-Librarian also installs the git repo for the elife specific drupal modules and themes. 
+Librarian also installs the git repo for the elife specific drupal modules and themes.
 
-This git repo includes the `roles` provided by the drupal vagrant proejct. These have been modified to not install varnish or memcached. This was done out of convinience. 
+This git repo includes the `roles` provided by the drupal vagrant proejct. These have been modified to not install varnish or memcached. This was done out of convinience.
 
 This git repo contains a placeholder `public` directory. This is the directory that is used to serve our drupal site out of.
 
@@ -85,10 +85,12 @@ This git repo contains a placeholder `public` directory. This is the directory t
 
 ## TODO
 
+- set the memory limit to 512M automatically instead of requiring this step to be run manually after the virtual machine is set up
+
 - the roles are a little over complicated, these should be simplified
 
 - `cookbooks/drupal/recipes/drupal_apps.rb` has been modified to not check whether the key `#if node["hosts"].has_key("localhost_aliases")` exists. Probably an updated issues with Ruby, should check, and re-implement
 
 - apc has been turned off, as getting it to install via chef was beyond me.
 
-- contribute back fixes to the main vagrant-drupal project, and stop holiding a private version of these cookbooks. 
+- contribute back fixes to the main vagrant-drupal project, and stop holiding a private version of these cookbooks.
