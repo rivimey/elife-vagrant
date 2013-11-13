@@ -6,7 +6,6 @@ site 'http://community.opscode.com/api/v1'
 # basics for drupal
 cookbook 'apt'
 cookbook 'git'
-cookbook 'apache2'
 cookbook 'build-essential'
 cookbook 'memcached'
 cookbook 'mysql'
@@ -14,23 +13,25 @@ cookbook 'openssl'
 cookbook 'php'
 cookbook 'varnish'
 cookbook 'hosts'
-cookbook 'phpmyadmin'
+cookbook 'phpmyadmin'   # from user priestjim on github
+cookbook 'openvpn'
+
+#cookbook 'openvpn',
+#        :git=> 'git@github.com:opscode-cookbooks/openvpn.git',
+
+cookbook 'apache2',
+        :git=> 'git@github.com:elifesciences/apache2.git'
 
 # elife drupal module git repos, and highwire drupal base site
 cookbook 'drupal-site-jnl-elife-cookbook',
-        :git=> 'git@github.com:elifesciences/drupal-site-jnl-elife-cookbook.git',
-	:ref=> 'dev'
+        :git=> 'git@github.com:elifesciences/drupal-site-jnl-elife-cookbook.git'
 
 # elife modified cookbooks for drupal installation
-cookbook 'drupal',
-        :git=> 'git@github.com:elifesciences/elife-drupal-cookbook.git',
-	:ref=> 'working'
+cookbook 'elife-drupal-cookbook',
+        :git=> 'git@github.com:elifesciences/elife-drupal-cookbook.git'
 
-cookbook 'drush',
+cookbook 'elife-drush-cookbook',
         :git=> 'git@github.com:elifesciences/elife-drush-cookbook.git'
-
-cookbook 'drush_make',
-        :git=> 'git@github.com:elifesciences/elife-drush-make-cookbook.git'
 
 # - hosts
 # - phpmyadmin

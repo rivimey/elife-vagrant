@@ -1,0 +1,38 @@
+#!/bin/bash
+
+cmd="$1"
+
+case $cmd in
+
+	"preinstall")
+		vagrant box add pre64-elife-rb1.9-chef-11 http://cdn.elifesciences.org/vm/pre64-elife-rb1.9-chef-11.box
+		( \
+		cd .. ;\
+		git clone git@github.com:elifesciences/drupal-highwire.git ;\
+		git clone git@github.com:elifesciences/drupal-site-jnl-elife.git ;\
+		) ;\
+		rm -rf Cheffile.lock cookbooks tmp
+		;;
+
+	"update")
+		librarian-chef update
+		;;
+
+	"run")
+		vagrant up
+		;;
+
+	"provision")
+		vagrant provision
+		;;
+
+	"clean")
+		echo Cleaning: destroy default VM...
+		vagrant destroy
+		echo Cleaning: Delete temp files
+		rm -rf Cheffile.lock cookbooks tmp roles
+		mkdir -p roles
+		echo Cleaned.
+		;;
+
+esac

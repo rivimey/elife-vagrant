@@ -18,50 +18,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # need to add apache to the synced folder via
-  config.vm.synced_folder "./public", "/opt/public", id: "vagrant-root", :owner => "www-data", :group => "www-data", :mount_options => [ "dmode=775", "fmode=664" ]
+  config.vm.synced_folder "./public", "/opt/public", id: "vagrant-root", :owner => "www-data", :group => "vagrant", :mount_options => [ "dmode=777", "fmode=666" ]
 
   # this expects the drupal-site-jnl-elife git repository checked out in the same parent folder
-  config.vm.synced_folder "../drupal-site-jnl-elife", "/shared/elife_module", id: "vagrant-elife", :owner => "www-data", :group => "www-data", :mount_options => [ "dmode=775", "fmode=664" ]
+  config.vm.synced_folder "../drupal-site-jnl-elife", "/shared/elife_module", id: "vagrant-elife", :owner => "www-data", :group => "vagrant", :mount_options => [ "dmode=777", "fmode=666" ]
 
   # Every Vagrant virtual environment requires a box to build off of.
   # This setting is global to the file; select dummy for AWS otherwise select pre64..
   config.vm.box = "pre64-elife-rb1.9-chef-11"
-  #config.vm.box = "dummy"
 
 # # # # # # # # # # # # # # # # # # 
-
-  # Install latest version of Chef
-  #config.omnibus.chef_version = :latest
-
-  config.vm.provider :aws do |aws, override| 
-
-    # Ruth
-    aws.access_key_id = ENV['AWS_KEY_ID'] 
-    aws.secret_access_key = ENV['AWS_SECRET_KEY']
-    aws.keypair_name = ENV['AWS_KEYPAIR_NAME']
-    override.ssh.private_key_path = ENV['AWS_KEY_PATH']
-
-    # You cannot pass any parameters to vagrant. The only way is to use
-    # environment variables, eg:
-    #    MY_VAR='my value' vagrant up
-    #    And use ENV['MY_VAR'] in recipe.
-
-    aws.instance_type = "m1.large"
-    aws.security_groups = [ "default" ]
-
-    aws.ami = "ami-de0d9eb7" 
-    aws.region = "us-east-1" 
-
-    override.ssh.username = "ubuntu" 
-    aws.tags = {
-      'Name' => 'Elife Vagrant',
-     }
-
-  end   # of aws provider
-
-# # # # # # # # # # # # # # # # # # 
-
-
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -69,12 +35,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb|
 
     # Boot in headless mode
-    vb.gui = false
+    vb.gui = true
 
     #
     # # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize ["modifyvm", :id, "--memory", "1024"]
-    vb.customize ["modifyvm", :id, "--vram", "12"]
+    vb.customize ["modifyvm", :id, "--memory", "3064"]
+    vb.customize ["modifyvm", :id, "--vram", "24"]
   
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.

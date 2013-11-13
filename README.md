@@ -1,10 +1,16 @@
-
 # About
 
 This repo contains the provisioning information for setting up a dev environment for building a local copy of [drupal-site-jnl-elife](https://github.com/elifesciences/drupal-site-jnl-elife).
 
-It is being built on top of the [drupal - vagrant project](https://drupal.org/project/vagrant), with an attempt to move the configuration to v2 of the vagrant API, and using librarian and chef for managing cookbooks.
+It is being built on top of the [drupal - vagrant project](https://drupal.org/project/vagrant), with the configuration moved to v2 of the vagrant API, and using librarian and chef for managing cookbooks.
 
+# Preqrequisites:
+
+Git on local host
+Git user created and with access to the elifesciences repository
+VirtualBox v4.2 installed (needed for shared folders)
+Vagrant installed on local host
+Tunnelblick installed on the host
 
 # Setup
 
@@ -12,16 +18,47 @@ To setup your system to work with Vagrant and Chef please follow the guide provi
 
 You are advised to setup and use the elife specified base box described in that guide, as it contains a base box configured with the required versions of chef, php and vagrant. If you don't have it setup already, you can add this box with the command:
 
-	$ vagrant box add pre64-elife-rb1.9-chef-11
-http://cdn.elifesciences.org/vm/pre64-elife-rb1.9-chef-11.box
+	vagrant box add pre64-elife-rb1.9-chef-11 http://cdn.elifesciences.org/vm/pre64-elife-rb1.9-chef-11.box
+
+Set up Tunnelblick to connect to Highwire using the key provided, and then connect.
 
 # Quickstart
 
-	$ git clone git@github.com:elifesciences/elife-vagrant.git
-	$ cd elife-vagrant
-	$ librarian-chef install
-	$ vagrant up
-	$ vagrant ssh
+Currently, use branch ruth-vagrant-fixes for the elife-vagrant module.
+
+	git clone git@github.com:elifesciences/elife-vagrant.git
+	
+	### change elifesciences to highwire in the next line if you have access and want the official repo: ###
+	git clone git@github.com:elifesciences/drupal-highwire.git
+	
+	git clone git@github.com:elifesciences/drupal-site-jnl-elife.git
+	cd elife-vagrant
+
+Now, Locate a copy of the journal database dump and save as a gzipped compressed file to .../elife-vagrant/public/jnl-elife.sql.gz, and locate a copy of the settings.php file (with drupal passwords and database setup) and save in .../elife-vagrant/public/settings.php
+
+	librarian-chef install && vagrant up
+	
+	## not necessary, but to check the server out, do:
+	vagrant ssh
+
+The site is set up to accept connections using http://elife.vbox.local:8080// so on the host configure /etc/hosts to include/extend a line such as:
+
+	127.0.0.1    localhost  elife.vbox.local
+
+
+# Restarting
+
+Some changes can be made using 'vagrant provision', but it is not recommended because changes aren't necessarily noticed and redone correctly:
+
+	vagrant provision
+
+To remake, following a change in the config files, do:
+
+	cd elife-vagrant      # in this directory
+	rm -rf cookbooks  tmp  Cheffile.lock
+	librarian-chef install && vagrant up
+
+
 
 # What it does
 
@@ -48,13 +85,10 @@ This git repo contains a placeholder `public` directory. This is the directory t
 
 ## TODO
 
-- netowrking is not working, so after install you can't actually see drupal running on the vm
-
 - the roles are a little over complicated, these should be simplified
 
-- `cookbooks/drupal/recipes/drupal_apps.rb` has been modified to not check whether the key `#if node["hosts"].has_key("localhost_aliases")` exists. Probably an updated issues with Ruby, should check, and re-imliment
+- `cookbooks/drupal/recipes/drupal_apps.rb` has been modified to not check whether the key `#if node["hosts"].has_key("localhost_aliases")` exists. Probably an updated issues with Ruby, should check, and re-implement
 
 - apc has been turned off, as getting it to install via chef was beyond me.
 
 - contribute back fixes to the main vagrant-drupal project, and stop holiding a private version of these cookbooks. 
-
