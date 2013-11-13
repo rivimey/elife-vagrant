@@ -85,7 +85,7 @@ This git repo contains a placeholder `public` directory. This is the directory t
 
 ## TODO
 
-- set the memory limit to 512M automatically instead of requiring this step to be run manually after the virtual machine is set up
+- set the memory limit to 256M automatically instead of requiring this step to be run manually after the virtual machine is set up
 
 - the roles are a little over complicated, these should be simplified
 

@@ -27,6 +27,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # This setting is global to the file; select dummy for AWS otherwise select pre64..
   config.vm.box = "pre64-elife-rb1.9-chef-11"
   config.vm.box_url = "http://cdn.elifesciences.org/vm/pre64-elife-rb1.9-chef-11.box"
+  #config.vm.box = "dummy"
 
 # # # # # # # # # # # # # # # # # #
 
