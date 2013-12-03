@@ -25,14 +25,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   # This setting is global to the file; select dummy for AWS otherwise select pre64..
-  config.vm.box = "pre64-elife-rb1.9-chef-11"
-  config.vm.box_url = "http://cdn.elifesciences.org/vm/pre64-elife-rb1.9-chef-11.box"
-  #config.vm.box = "dummy"
+  #config.vm.box = "pre64-elife-rb1.9-chef-11"
+  #config.vm.box_url = "http://cdn.elifesciences.org/vm/pre64-elife-rb1.9-chef-11.box"
+  config.vm.box = "dummy"
 
 # # # # # # # # # # # # # # # # # #
 
   # Install latest version of Chef
-  #config.omnibus.chef_version = :latest
+  config.omnibus.chef_version = :latest
 
   config.vm.provider :aws do |aws, override|
 
@@ -48,14 +48,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #    And use ENV['MY_VAR'] in recipe.
 
     aws.instance_type = "m1.large"
-    aws.security_groups = [ "default" ]
+    aws.security_groups = [ "default-vpn" ]
 
     aws.ami = "ami-de0d9eb7"
     aws.region = "us-east-1"
 
     override.ssh.username = "ubuntu"
     aws.tags = {
-      'Name' => 'Elife Vagrant',
+      'Name' => 'Elife Vagrant VPN',
      }
 
   end   # of aws provider
@@ -90,7 +90,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # define where things have been collected together by librarian-chef
     chef.cookbooks_path = ["cookbooks"]
-    chef.roles_path = ["roles"]
 
     # Set this to :debug if you want more debugging info, else :info or :warn
     chef.log_level = :info
@@ -98,7 +97,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # this installs most of the infrastrucutre required to support a drupal instance
     chef.add_recipe "apt" # add this so we have updated packages available
     chef.add_recipe "git"
-    # chef.add_recipe "openvpn"  # vpn to highwire needed, but using tunnelblick on mac host instead.
 
     # This represents our default Drupal development stack.
     chef.add_recipe "elife-drupal-cookbook::drupal_lamp_dev"

@@ -56,7 +56,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # define where things have been collected together by librarian-chef
     chef.cookbooks_path = ["cookbooks"]
-    chef.roles_path = ["roles"]
 
     # Set this to :debug if you want more debugging info, else :info or :warn
     chef.log_level = :info
@@ -64,7 +63,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # this installs most of the infrastrucutre required to support a drupal instance
     chef.add_recipe "apt" # add this so we have updated packages available
     chef.add_recipe "git"
-    # chef.add_recipe "openvpn"  # vpn to highwire needed, but using tunnelblick on mac host instead.
 
     # This represents our default Drupal development stack.
     chef.add_recipe "elife-drupal-cookbook::drupal_lamp_dev"

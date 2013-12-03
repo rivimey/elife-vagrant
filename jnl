@@ -4,26 +4,32 @@ cmd="$1"
 
 case $cmd in
 
-	"preinstall")
+	"boxes")
 		vagrant box add pre64-elife-rb1.9-chef-11 http://cdn.elifesciences.org/vm/pre64-elife-rb1.9-chef-11.box
+		vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
+		;;
+
+	"preinstall")
 		( \
 		cd .. ;\
 		git clone git@github.com:elifesciences/drupal-highwire.git ;\
 		git clone git@github.com:elifesciences/drupal-site-jnl-elife.git ;\
 		) ;\
-		rm -rf Cheffile.lock cookbooks tmp
 		;;
 
 	"update")
 		librarian-chef update
 		;;
 
-	"run")
-		vagrant up
+	"up")
+		shift
+		# can do jnl up --provider=aws for example...
+		vagrant up "$*"
 		;;
 
 	"provision")
-		vagrant provision
+		shift
+		vagrant provision "$*"
 		;;
 
 	"clean")
