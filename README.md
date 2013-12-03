@@ -24,14 +24,12 @@ Set up Tunnelblick to connect to Highwire using the key provided, and then conne
 
 # Quickstart
 
-Currently, use branch ruth-vagrant-fixes for the elife-vagrant module.
+On the master branch:
 
 	git clone git@github.com:elifesciences/elife-vagrant.git
 
-	### change elifesciences to highwire in the next line if you have access and want the official repo: ###
-	git clone git@github.com:elifesciences/drupal-highwire.git
-
 	git clone git@github.com:elifesciences/drupal-site-jnl-elife.git
+
 	cd elife-vagrant
 
 Now, Locate a copy of the journal database dump and save as a gzipped compressed file to .../elife-vagrant/public/jnl-elife.sql.gz, and locate a copy of the settings.php file (with drupal passwords and database setup) and save in .../elife-vagrant/public/settings.php
