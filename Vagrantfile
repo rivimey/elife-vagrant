@@ -48,14 +48,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #    And use ENV['MY_VAR'] in recipe.
 
     aws.instance_type = "m1.large"
-    aws.security_groups = [ "default" ]
+    aws.security_groups = [ "default-vpn" ]
 
     aws.ami = "ami-de0d9eb7"
     aws.region = "us-east-1"
 
     override.ssh.username = "ubuntu"
     aws.tags = {
-      'Name' => 'Elife Vagrant',
+      'Name' => 'Elife Vagrant VPN',
      }
 
   end   # of aws provider
@@ -98,7 +98,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # this installs most of the infrastrucutre required to support a drupal instance
     chef.add_recipe "apt" # add this so we have updated packages available
     chef.add_recipe "git"
-    # chef.add_recipe "openvpn"  # vpn to highwire needed, but using tunnelblick on mac host instead.
 
     # This represents our default Drupal development stack.
     chef.add_recipe "elife-drupal-cookbook::drupal_lamp_dev"
