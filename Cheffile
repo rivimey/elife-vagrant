@@ -16,7 +16,7 @@ cookbook 'hosts'
 cookbook 'phpmyadmin'   # from user priestjim on github
 
 cookbook 'openvpnc',
-        :git=> 'git@github.com:rivimey/openvpnc.git',
+        :git=> 'git@github.com:rivimey/openvpnc.git'
 
 cookbook 'apache2',
         :git=> 'git@github.com:elifesciences/apache2.git'
