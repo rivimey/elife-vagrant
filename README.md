@@ -110,10 +110,6 @@ file when you need to use vagrant-aws:
 
 The Vagrantfile in elife-vagrant must me changed slightly to support AWS:
 
- - The line starting "config.vm.box = pre64" must be commented out and the one below it mentioning
-   "dummy" must be uncommented.
- - The line starting config.omnibus.chef_version must be uncommented
-
 Optionally, the mapping 'Name' => 'Elife Vagrant VPN' can be changed if you want to name your instance.
 
 Having saved those changes, you can start up the VM for the first time using:
