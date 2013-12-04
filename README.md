@@ -158,6 +158,37 @@ To remake from scratch, and so ensure all is ok, do:
 	librarian-chef install && vagrant up
 
 
+# Troubleshooting
+
+## AWS Keys not provided
+
+The error:
+
+	There are errors in the configuration of this machine. Please fix
+	the following errors and try again:
+
+	AWS Provider:
+	* An access key ID must be specified via "access_key_id"
+	* A secret access key is required via "secret_access_key"
+
+means you haven't setup your AWS keys (or your shell isn't passing them into the script). This
+could be because you are using a separate file (such as ".aws_keys") and you haven't 'sourced'
+the file into the current shell.
+
+## Librarian-Chef Not Run
+
+The error:
+
+	[default] The cookbook path '/work/work-aws-openvpn2/elife-vagrant/cookbooks' doesn't exist. Ignoring...
+
+means you haven't run:
+
+	librarian-chef install
+
+(or it failed to run correctly).
+
+
+
 # What it does
 
 Cookbooks are installed using librarian. Check the `Cheffile` to see which cookbooks we donwnlad as
@@ -184,6 +215,10 @@ our drupal site out of.
 [eldcook]: https://github.com/elifesciences/drupal-site-jnl-elife-cookbook
 
 ## Issues with the Drupal Install
+
+
+
+
 
 ## TODO
 
