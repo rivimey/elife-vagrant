@@ -104,6 +104,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # site and SQL files for our Drupal site
     chef.add_recipe "drupal-site-jnl-elife-cookbook::default"
 
+    # moved here from drupal-site-jnl-elife default recipe so that it can
+    # be commented out at need:
+    chef.add_recipe  "drupal-site-jnl-elife-cookbook::openvpnc"
+
     # Pulled out so it's obvious: disable content delivery as it won't work for non-live sites
     # apache restart needed before this works and restarts are delayed by default. Change
     # the web_app rule to change this behaviour:
