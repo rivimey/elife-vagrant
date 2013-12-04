@@ -108,9 +108,7 @@ file when you need to use vagrant-aws:
 
     . ~/.aws_keys
 
-The Vagrantfile in elife-vagrant must me changed slightly to support AWS:
-
-Optionally, the mapping 'Name' => 'Elife Vagrant VPN' can be changed if you want to name your instance.
+Optionally, the mapping 'Name' => 'Elife Vagrant VPN' can be changed in the Vagrantfile if you want to name your instance.
 
 Having saved those changes, you can start up the VM for the first time using:
 
