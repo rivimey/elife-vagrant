@@ -26,17 +26,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   # This setting is global to the file; select dummy for AWS otherwise select pre64..
   config.vm.box = "pre64-elife-rb1.9-chef-11"
-  #config.vm.box_url = "http://cdn.elifesciences.org/vm/pre64-elife-rb1.9-chef-11.box"
-  #config.vm.box = "dummy"
+  config.vm.box_url = "http://cdn.elifesciences.org/vm/pre64-elife-rb1.9-chef-11.box"
 
 # # # # # # # # # # # # # # # # # #
 
-  # Install latest version of Chef
-  #config.omnibus.chef_version = :latest
-
   config.vm.provider :aws do |aws, override|
 
-    # Ruth
+    override.vm.box = "dummy"
+    override.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
+
+    # Install latest version of Chef
+    override.omnibus.chef_version = :latest
+
     aws.access_key_id = ENV['AWS_KEY_ID']
     aws.secret_access_key = ENV['AWS_SECRET_KEY']
     aws.keypair_name = ENV['AWS_KEYPAIR_NAME']
