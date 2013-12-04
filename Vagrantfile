@@ -52,9 +52,9 @@ end
 # If there is a problem, let the user have a chance to fix it
 if warnings > 0
   print "\nWarnings have been issued: abort this command? [Yes/No] "
-  $stdout.flush
-  $ans = gets.chomp.strip
-  abort unless ($ans == "no" || $ans == "No")
+  STDOUT.flush
+  ans = STDIN.gets.chomp.strip
+  abort unless (ans === "no" || ans === "No")
 end
 
 
