@@ -40,7 +40,7 @@ end
 
 # These tests are needed to run up the Drupal site.
 
-if !File.exist?(public_dir + "/jnl_elife.sql.gz")
+if !File.exist?(public_dir + "/jnl-elife.sql.gz")
   puts "WARNING: Website database dump jnl_elife.sql.gz is missing."
   warnings = warnings + 1
 end
