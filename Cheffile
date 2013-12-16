@@ -4,6 +4,7 @@
 site 'http://community.opscode.com/api/v1'
 
 # basics for drupal
+cookbook 'apache2'
 cookbook 'apt'
 cookbook 'git'
 cookbook 'build-essential'
@@ -17,9 +18,6 @@ cookbook 'phpmyadmin'   # from user priestjim on github
 
 cookbook 'openvpnc',
         :git=> 'git@github.com:rivimey/openvpnc.git'
-
-cookbook 'apache2',
-        :git=> 'git@github.com:elifesciences/apache2.git'
 
 # elife drupal module git repos, and highwire drupal base site
 cookbook 'drupal-site-jnl-elife-cookbook',
