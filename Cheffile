@@ -11,7 +11,7 @@ cookbook 'build-essential'
 cookbook 'memcached'
 cookbook 'mysql'
 cookbook 'openssl'
-cookbook 'php', :git => 'git@github.com:franklinkim/chef-opscode-php.git' # use until pull request is accepted https://github.com/opscode-cookbooks/php/pull/54
+cookbook 'php', :git => 'git@github.com:elifesciences/chef-opscode-php.git' # use until pull request is accepted https://github.com/opscode-cookbooks/php/pull/54
 cookbook 'varnish'
 cookbook 'hosts'
 cookbook 'phpmyadmin' # from user priestjim on github
