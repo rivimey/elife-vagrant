@@ -4,30 +4,24 @@
 site 'http://community.opscode.com/api/v1'
 
 # basics for drupal
-cookbook 'apache2'
-cookbook 'apt'
-cookbook 'git'
-cookbook 'build-essential'
-cookbook 'memcached'
-cookbook 'mysql'
-cookbook 'openssl'
-cookbook 'php', :git => 'git@github.com:elifesciences/chef-opscode-php.git' # use until pull request is accepted https://github.com/opscode-cookbooks/php/pull/54
-cookbook 'varnish'
-cookbook 'hosts'
-cookbook 'phpmyadmin' # from user priestjim on github
+cookbook 'apache2', '=1.10.0'
+cookbook 'apt', '=2.3.8'
+cookbook 'git', '=4.0.0'
+cookbook 'build-essential', '=1.4.4'
+cookbook 'memcached', '=1.7.2'
+cookbook 'mysql', '=4.1.2'
+cookbook 'openssl', '=1.1.0'
+cookbook 'php', '=1.4.6'
+cookbook 'varnish', '=0.9.12'
+cookbook 'hosts', '=0.1.1'
+cookbook 'phpmyadmin', '=1.0.6'    # from user priestjim on github
 
-cookbook 'openvpnc', :git => 'git@github.com:rivimey/openvpnc.git'
+cookbook 'openvpnc', '=2.1.0', :git => 'git@github.com:rivimey/openvpnc.git'
 
 # elife drupal module git repos, and highwire drupal base site
-cookbook 'drupal-site-jnl-elife-cookbook', :git => 'git@github.com:elifesciences/drupal-site-jnl-elife-cookbook.git'
+cookbook 'drupal-site-jnl-elife-cookbook', '=0.2.2', :git => 'git@github.com:elifesciences/drupal-site-jnl-elife-cookbook.git'
 
 # elife modified cookbooks for drupal installation
-cookbook 'elife-drupal-cookbook', :git => 'git@github.com:elifesciences/elife-drupal-cookbook.git'
+cookbook 'elife-drupal-cookbook', '=0.3.0', :git => 'git@github.com:elifesciences/elife-drupal-cookbook.git'
 
-cookbook 'elife-drush-cookbook', :git => 'git@github.com:elifesciences/elife-drush-cookbook.git'
-
-# - hosts
-# - phpmyadmin
-
-# TODOs
-# - provide specific versions for community cookbooks
+cookbook 'elife-drush-cookbook', '=0.9.1', :git => 'git@github.com:elifesciences/elife-drush-cookbook.git'

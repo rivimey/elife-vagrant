@@ -1,0 +1,10 @@
+/.vagrant/
+/Cheffile.lock
+/cookbooks/
+/public/ca.crt
+/public/client.crt
+/public/client.key
+/public/jnl-elife.sql.gz
+/public/settings.php
+/public/ta.key
+/tmp/

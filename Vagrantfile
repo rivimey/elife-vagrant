@@ -90,7 +90,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
 
     # Install latest version of Chef
-    override.omnibus.chef_version = :latest
+    override.omnibus.chef_version = "11.12.0"
 
     aws.access_key_id = ENV['AWS_KEY_ID']
     aws.secret_access_key = ENV['AWS_SECRET_KEY']
