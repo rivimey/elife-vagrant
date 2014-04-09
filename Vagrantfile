@@ -105,7 +105,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.instance_type = "m1.large"
     aws.security_groups = [ "default-vpn" ]
 
-    aws.ami = "ami-de0d9eb7"
+    aws.ami = "ami-2f8f9246"
     aws.region = "us-east-1"
 
     override.ssh.username = "ubuntu"
@@ -149,10 +149,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Set this to :debug if you want more debugging info, else :info or :warn
     chef.log_level = :info
 
-    # this installs most of the infrastrucutre required to support a drupal instance
-    chef.add_recipe "apt" # add this so we have updated packages available
-    chef.add_recipe "git"
-
     # This represents our default Drupal development stack.
     chef.add_recipe "elife-drupal-cookbook::drupal_lamp_dev"
 
@@ -193,6 +189,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         "hiwire_rev" => "7.x-1.x-stable",
         "webroot_rev" => "7.x-1.x-stable",
         "setup_vpn_client" => ELIFE_CONFIGURE_OPENVPN
+      },
+      "apt" => {
+        "periodic_update_min_delay" => 720,
       }
     }
 
