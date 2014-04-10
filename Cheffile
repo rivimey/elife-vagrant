@@ -19,7 +19,7 @@ cookbook 'phpmyadmin', '=1.0.6'    # from user priestjim on github
 cookbook 'openvpnc', '=2.1.0', :git => 'git@github.com:rivimey/openvpnc.git'
 
 # elife drupal module git repos, and highwire drupal base site
-cookbook 'drupal-site-jnl-elife-cookbook', '=0.2.2', :git => 'git@github.com:elifesciences/drupal-site-jnl-elife-cookbook.git'
+cookbook 'drupal-site-jnl-elife-cookbook', :git => 'git@github.com:elifesciences/drupal-site-jnl-elife-cookbook.git'
 
 # elife modified cookbooks for drupal installation
 cookbook 'elife-drupal-cookbook', '=0.3.0', :git => 'git@github.com:elifesciences/elife-drupal-cookbook.git'
